@@ -20,15 +20,10 @@ class SearchResultsViewController: UIViewController {
             let ranges: [Range<String.Index>] = { let r = text.lowercased().ranges(of: searchText.lowercased()); return r.isEmpty ? nil : r }()
             else { return NSAttributedString(string: text) }
         
-        let attributedText = NSMutableAttributedString(string: text)
+        let attributedText = NSMutableAttributedString(string: text, attributes: [.font: UIFont.boldSystemFont(ofSize: 17.0)])
         
         ranges.forEach {
-            attributedText.addAttributes(
-                [.foregroundColor: UIColor.red,
-                 .font: UIFont.boldSystemFont(ofSize: 17.0)
-                 ],
-                range: NSRange($0, in: text)
-            )
+            attributedText.addAttribute(.font, value: UIFont.systemFont(ofSize: 17.0), range: NSRange($0, in: text))
         }
         
         return attributedText
